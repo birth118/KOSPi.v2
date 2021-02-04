@@ -1,0 +1,48 @@
+* Landing
+DONE app.get('/', (req, res) => {
+
+*Auth
+DONE  app.get('/auth/google',
+DONE  app.get('/auth/google/secrets',
+DONE  app.post('/login',
+DONE  app.get('/logout', function (req, res) {
+NO-NEED  app.post('/user', async (req, res) => {
+
+*stockCode
+DONE app.get('/code', async (req, res) => {  종목 리스트
+DONE app.post('/code', async (req, res) => {   종목 등록
+DONE app.get('/transact/:code', (req, res) => { // 종목상새
+DONE app.post('/update', async (req, res) => {  // @desc     개별 종목 현재가격, 내재가치등 업데이트
+
+*transact
+
+DONE app.post('/transact', async (req, res) => {
+DONE app.get('/update/:code', async (req, res) => { 해당 종목 transction list up
+
+
+*history 
+DONE app.get('/history/:code', async (req, res) => {
+DONE app.get('/historyFrom/:code', async (req, res) => {
+
+  ==============
+
+
+src/routes//stockcodes/stockcode-update.ts:route.patch(
+src/routes//stockcodes/stockcode-delete.ts:route.delete(
+src/routes//stockcodes/stockcode-list.ts:route.get(
+src/routes//stockcodes/stockcode-show.ts:route.get(
+src/routes//stockcodes/stockcode-new.ts:route.post(
+
+src/routes//mytest.ts:route.post(
+
+src/routes//users/sign-up.ts:route.post(
+src/routes//users/sign-in.ts:route.post(
+src/routes//users/sign-out.ts:route.get('/api/user/signout', (req: Request, res: Response) => {
+src/routes//users/current-user.ts:route.get(
+
+src/routes//users/passport-login.ts:route.get(
+src/routes//users/passport-login.ts:route.get(
+
+src/routes//transact/transact-list.ts:route.get(
+src/routes//transact/transact-new.ts:route.post(
+src/routes//transact/transact-all-byDate.ts:route.get(
