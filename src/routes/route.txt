@@ -27,22 +27,24 @@ DONE app.get('/historyFrom/:code', async (req, res) => {
   ==============
 
 
-src/routes//stockcodes/stockcode-update.ts:route.patch(
-src/routes//stockcodes/stockcode-delete.ts:route.delete(
-src/routes//stockcodes/stockcode-list.ts:route.get(
-src/routes//stockcodes/stockcode-show.ts:route.get(
-src/routes//stockcodes/stockcode-new.ts:route.post(
+stockcodes/stockcode-update.ts:route.patch('/api/stockcode/:id'
+stockcodes/stockcode-delete.ts:route.delete('/api/stockcode/:id'
+stockcodes/stockcode-list.ts:route.get('/api/stockcode/'
+stockcodes/stockcode-show.ts:route.get(/api/stockcode/:id'
+stockcodes/stockcode-summary.ts:route.get('/api/stockcode/summary'
+stockcodes/stockcode-new.ts:route.post('/api/stockcode/'
 
-src/routes//mytest.ts:route.post(
 
-src/routes//users/sign-up.ts:route.post(
-src/routes//users/sign-in.ts:route.post(
-src/routes//users/sign-out.ts:route.get('/api/user/signout', (req: Request, res: Response) => {
-src/routes//users/current-user.ts:route.get(
+mytest.ts:route.post(
 
-src/routes//users/passport-login.ts:route.get(
-src/routes//users/passport-login.ts:route.get(
+users/sign-up.ts:route.post(
+users/sign-in.ts:route.post(
+users/sign-out.ts:route.get('/api/user/signout', (req: Request, res: Response) => {
+users/current-user.ts:route.get(
 
-src/routes//transact/transact-list.ts:route.get(
-src/routes//transact/transact-new.ts:route.post(
-src/routes//transact/transact-all-byDate.ts:route.get(
+users/passport-login.ts:route.get(
+users/passport-login.ts:route.get(
+
+transact/transact-list.ts:route.get(
+transact/transact-new.ts:route.post(
+transact/transact-all-byDate.ts:route.get(

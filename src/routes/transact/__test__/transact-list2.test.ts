@@ -109,11 +109,13 @@ it('passes with sorted order of allocation', async () => {
     .get(`/api/stockcode`)
     .set('Cookie', cookie)
     .send()
-  //  .expect(200)
+    .expect(200)
 
-  console.log(
-    resp3GET.body.map((item: any) => {
-      return item.total
-    })
-  )
+  expect(resp3GET.body.length).toEqual(3)
+
+  // console.log(
+  //   resp3GET.body.map((item: any) => {
+  //     return item.total
+  //   })
+  // )
 })

@@ -3,13 +3,16 @@ import mongoose from 'mongoose'
 import request from 'supertest'
 import app from '../../../app'
 import { BuyOrSell } from '../../../models/buyOrSell-enum'
+import { Currency } from '../../../models/currency-enum'
 
 import { StockCode } from '../../../models/stockCode'
 
 const newStockcode = async (
   companyName: string,
   companyCode: string,
-  cookie: any
+  cookie: any,
+  currentPrice: number,
+  currency: Currency
 ) => {
   // const cookie = await global.signin()
   // console.log(cookie)
@@ -18,8 +21,9 @@ const newStockcode = async (
     companyName,
     companyCode,
     market: 'KOSPI',
-    currency: 'KRW',
+    currency,
     wics: '번기전자',
+    currentPrice,
   }
 
   const { body } = await request(app)
@@ -62,10 +66,16 @@ const newTransaction = async (
   return { body }
 }
 
-it('list up all transations by descending order', async () => {
+it('Summarise up all holdings in KRW and curreny table', async () => {
   const cookie = await global.signin()
 
-  const { body } = await newStockcode('삼성', '1234567', cookie)
+  const { body } = await newStockcode(
+    '삼성',
+    '1234567',
+    cookie,
+    1200,
+    Currency.KRW
+  )
   await newTransaction(
     body.companyName,
     body.companyCode,
@@ -83,7 +93,7 @@ it('list up all transations by descending order', async () => {
     cookie
   )
 
-  const resp = await newStockcode('NHN', '62355678', cookie)
+  const resp = await newStockcode('NHN', '62355678', cookie, 1200, Currency.KRW)
   await newTransaction(
     resp.body.companyName,
     resp.body.companyCode,
@@ -93,7 +103,7 @@ it('list up all transations by descending order', async () => {
     cookie
   )
 
-  const resp1 = await newStockcode('SK', '62355578', cookie)
+  const resp1 = await newStockcode('SK', '62355578', cookie, 1200, Currency.KRW)
   await newTransaction(
     resp1.body.companyName,
     resp1.body.companyCode,
@@ -105,12 +115,69 @@ it('list up all transations by descending order', async () => {
 
   //console.log(cookie)
 
-  const resp3GET = await request(app)
-    .get(`/api/transactAll/20200101`)
+  const respGET = await request(app)
+    .get('/api/stockcodesummary')
     .set('Cookie', cookie)
     .send()
     .expect(200)
 
-  expect(resp3GET.body.length).toEqual(4)
-  // console.log(resp3GET.body)
+  console.log(respGET.body)
+})
+
+it('Summarise up all holdings in KRW and USD and curreny table', async () => {
+  const cookie = await global.signin()
+
+  const { body } = await newStockcode(
+    '삼성',
+    '1234567',
+    cookie,
+    1200,
+    Currency.KRW
+  )
+  await newTransaction(
+    body.companyName,
+    body.companyCode,
+    1000,
+    30,
+    BuyOrSell.BUY,
+    cookie
+  )
+  await newTransaction(
+    body.companyName,
+    body.companyCode,
+    2000,
+    10,
+    BuyOrSell.BUY,
+    cookie
+  )
+
+  const resp = await newStockcode('NHN', '62355678', cookie, 1200, Currency.USD)
+  await newTransaction(
+    resp.body.companyName,
+    resp.body.companyCode,
+    1000,
+    40,
+    BuyOrSell.BUY,
+    cookie
+  )
+
+  const resp1 = await newStockcode('SK', '62355578', cookie, 1200, Currency.KRW)
+  await newTransaction(
+    resp1.body.companyName,
+    resp1.body.companyCode,
+    1000,
+    65,
+    BuyOrSell.BUY,
+    cookie
+  )
+
+  //console.log(cookie)
+
+  const respGET = await request(app)
+    .get('/api/stockcodesummary')
+    .set('Cookie', cookie)
+    .send()
+    .expect(200)
+
+  console.log(respGET.body)
 })
