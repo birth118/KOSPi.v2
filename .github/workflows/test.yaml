@@ -2,10 +2,7 @@
 
 name: test
 
-on:
-  pull_request_target:
-    paths:
-      - '/**' #all codes
+on: pull_request
 
 jobs:
   build:
