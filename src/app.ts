@@ -20,6 +20,7 @@ import {
   stockCodeNew,
   stockCodeShow,
   stockCodeUpdate,
+  stockCodeSummary,
 } from './routes/stockcodes'
 
 import { transactList, transactNew, transactAllByDate } from './routes/transact'
@@ -82,6 +83,7 @@ app.use(stockCodeList)
 app.use(stockCodeNew)
 app.use(stockCodeShow)
 app.use(stockCodeUpdate)
+app.use(stockCodeSummary)
 
 app.use(transactList)
 app.use(transactNew)

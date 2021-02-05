@@ -23,6 +23,9 @@ interface StockCodeDoc extends mongoose.Document {
   avgBuyingPrice: number
   avgPER: number
   avgPBR: number
+  currency: Currency
+  currentPrice: number
+  market: Market
 }
 
 interface StockCodeModel extends mongoose.Model<StockCodeDoc> {

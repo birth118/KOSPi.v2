@@ -2,6 +2,7 @@ import { body } from 'express-validator'
 import express, { Request, Response } from 'express'
 import { authRequired } from '../../middleware'
 import { StockCode } from '../../models/stockCode'
+import { currencyTable } from '../../apis/fx'
 
 const route = express.Router()
 
@@ -9,6 +10,8 @@ route.get(
   '/api/stockcode/',
   authRequired,
   async (req: Request, res: Response) => {
+    const currenciesTable = await currencyTable()
+
     const list = await StockCode.find({
       userId: req.currentUser!.userId,
     })
@@ -22,18 +25,36 @@ route.get(
       return { companyCode, holdings, avgBuyingPrice }
     })
 
-    //Todo: Put  sort listing logic here for viewing
+    // Portfolio total value
+    const initialValue = 0
+    const totalValue = list.reduce((accum, item) => {
+      return (
+        accum +
+        (item.currency
+          ? item.currentPrice * currenciesTable[item.currency]
+          : item.currentPrice) *
+          item.holdings
+      )
+    }, initialValue)
 
+    // Portfolio listing for viewing on client side
     const tempList = list.map((item) => {
-      const total = item.holdings * item.avgBuyingPrice
+      const itemValue = item.holdings * item.avgBuyingPrice
 
-      return { total: total, item }
+      const itemPortion =
+        ((item.currency
+          ? item.avgBuyingPrice * currenciesTable[item.currency]
+          : item.avgBuyingPrice) *
+          item.holdings) /
+        totalValue
+
+      return { itemValue: itemValue, itemPortion: itemPortion, item }
     })
 
     const sortedList = tempList.sort((a, b) => {
-      return b.total - a.total
+      return b.itemValue - a.itemValue
     })
-    // console.log(sortedList)
+
     res.send(sortedList)
   }
 )
