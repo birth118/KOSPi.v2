@@ -22,7 +22,7 @@ const start = async () => {
   }
 
   app.listen(port, () => {
-    console.log('Server up:', port)
+    console.log('Express server up:', port)
   })
 }
 
