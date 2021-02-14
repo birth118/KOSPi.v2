@@ -9,7 +9,8 @@ How Passport works and its flow  in order
       --> Recommented to wire passport with session for post-authentication request 
           to use like req.isAuthenticated() 
       --> use cookie-session (KOSPI.v2 app) or express-session npm (KOSPI app)
- 5. Once Sign-up/Sign-in route is accsessed, passport serialise() the user record and put to the session if wired
+ 5. Once Sign-up/Sign-in route is accsessed, passport serialise() the user record 
+    and i) save to DB and ii) put the user record to the session if wired 
  6. Then, the user record and session can be accesed within the app
  */
 
@@ -63,14 +64,14 @@ passport.use(
 )
 
 passport.serializeUser(function (user: any, done) {
-  console.log(`===> SERIALISE: ${user}`)
+  //  console.log(`===> SERIALISE: ${user}`)
   done(null, user)
   //done(null, { _id: user._id })
   // to serialise (casting) session only with User id and holding stocks , not just with user._id.
 })
 
 passport.deserializeUser(function (id, done) {
-  console.log(`===>DE_SERIALISE: ${id}`)
+  //  console.log(`===>DE_SERIALISE: ${id}`)
   User.findById(id, function (err: any, user: any) {
     done(err, user)
   })

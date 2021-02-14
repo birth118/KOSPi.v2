@@ -13,15 +13,16 @@ const route = express.Router()
 route.post(
   '/api/user/signup',
   [
-    body('name').not().isEmpty().withMessage('Name should be provided'),
+    body('name').not().isEmpty().withMessage('Name must be provided'),
     body('email').isEmail().withMessage('Should be email'),
     body('password')
       .isLength({ min: 7 })
       .withMessage('Should be min 7 character'),
+    body('provider').not().isEmpty().withMessage('Provider must be provided'),
   ],
   validate,
   async (req: Request, res: Response) => {
-    const { name, email, password } = req.body
+    const { name, email, password, provider } = req.body
 
     if (await User.findOne({ email })) {
       throw new BadRequestError('Email in use')
@@ -31,7 +32,7 @@ route.post(
       email,
       password,
       name,
-      provider: 'local', // Use is created by email method. Not by google auth
+      provider, // Use is created by email method. Not by google auth
     }
 
     //console.log(login)

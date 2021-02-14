@@ -42,7 +42,7 @@ const fxToFromEURPromise = (): Promise<Currency> => {
 }
 
 export const currencyTable = async () => {
-  const currency = await fxToFromEURPromise()
+  // const currency = await fxToFromEURPromise()
 
   let currencies = await fxToFromEURPromise()
   const currenciesTable = {

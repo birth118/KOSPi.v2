@@ -31,7 +31,7 @@ stockcodes/stockcode-update.ts:route.patch('/api/stockcode/:id'
 stockcodes/stockcode-delete.ts:route.delete('/api/stockcode/:id'
 stockcodes/stockcode-list.ts:route.get('/api/stockcode/'
 stockcodes/stockcode-show.ts:route.get(/api/stockcode/:id'
-stockcodes/stockcode-summary.ts:route.get('/api/stockcode/summary'
+stockcodes/stockcode-summary.ts:route.get('/api/stockcodesummary'
 stockcodes/stockcode-new.ts:route.post('/api/stockcode/'
 
 

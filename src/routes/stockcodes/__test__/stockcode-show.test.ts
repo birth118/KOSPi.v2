@@ -14,11 +14,11 @@ it('passes 200 to show the stock detail with authentication cookie', async () =>
   // console.log(cookie)
 
   const stockCode = {
-    companyName: 'NHN',
-    companyCode: '123457',
+    companyName: '바텍',
+    companyCode: '043150',
     market: 'KOSPI',
     currency: 'CNY',
-    wics: '번기전자',
+    wics: '항공사',
   }
 
   const respPOST = await request(app)
@@ -28,16 +28,16 @@ it('passes 200 to show the stock detail with authentication cookie', async () =>
     .expect(201)
 
   const respGET = await request(app)
-    .get(`/api/stockcode/${respPOST.body._id}`)
+    .get(`/api/stockcode/${respPOST.body.companyCode}`)
     .set('Cookie', cookie)
     .expect(200)
 
-  expect(respGET.body.companyCode).toEqual('123457')
+  expect(respGET.body.companyCode).toEqual('043150')
 })
 
 it('fails 404 Not found to show the stock detail with incorrect stockcode id with authentication cookie', async () => {
   const cookie = await global.signin()
-  const stockId = mongoose.Types.ObjectId()
+  const stockId = '12345'
 
   const resp = await request(app)
     .get(`/api/stockcode/${stockId}`)

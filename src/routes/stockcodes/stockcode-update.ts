@@ -16,11 +16,9 @@ route.patch(
   validate,
   authRequired,
   async (req: Request, res: Response) => {
-    const holdings = await StockCode.find({
+    const stock = await StockCode.findOne({
       userId: req.currentUser!.userId,
-    })
-    const stock = holdings.find((stock) => {
-      return (stock._id = req.params.id)
+      companyCode: req.params.id,
     })
 
     if (!stock) {

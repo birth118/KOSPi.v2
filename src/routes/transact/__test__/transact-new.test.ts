@@ -9,11 +9,11 @@ const newStockcode = async () => {
   // console.log(cookie)
 
   const stockCode = {
-    companyName: 'NHN',
-    companyCode: '123457',
-    market: 'KOSPI',
-    currency: 'CNY',
-    wics: '번기전자',
+    companyName: '에스텍',
+    companyCode: '069510',
+    market: 'KOSDAQ',
+    currency: 'KRW',
+    wics: '전자장비와기기',
   }
 
   const { body } = await request(app)
@@ -144,7 +144,7 @@ it('passes with avdBuyPrice and holdings pre-save() in BUY stockCode table with 
     .expect(201)
 
   const resp1GET = await request(app)
-    .get(`/api/stockcode/${body.userId}`)
+    .get(`/api/stockcode/${body.companyCode}`)
     .set('Cookie', cookie)
     .send()
     .expect(200)
@@ -157,7 +157,7 @@ it('passes with avdBuyPrice and holdings pre-save() in BUY stockCode table with 
     .expect(201)
 
   const resp2GET = await request(app)
-    .get(`/api/stockcode/${body.userId}`)
+    .get(`/api/stockcode/${body.companyCode}`)
     .set('Cookie', cookie)
     .send()
     .expect(200)
@@ -209,12 +209,17 @@ it('passes with profit and profilePercent and holdings pre-save() in SELL StockC
     .send(transact1)
     .expect(201)
 
+  // const stock = await StockCode.findOne({
+  //   userId: body.userId,
+  //   companyCode: body.companyCode,
+  // })
+  // console.log(stock)
+
   const resp1GET = await request(app)
-    .get(`/api/stockcode/${body.userId}`)
+    .get(`/api/stockcode/${body.companyCode}`)
     .set('Cookie', cookie)
     .send()
     .expect(200)
-  //console.log(resp1GET.body)
 
   const resp2 = await request(app)
     .post(`/api/transact/`)
@@ -223,7 +228,7 @@ it('passes with profit and profilePercent and holdings pre-save() in SELL StockC
     .expect(201)
 
   const resp2GET = await request(app)
-    .get(`/api/stockcode/${body.userId}`)
+    .get(`/api/stockcode/${body.companyCode}`)
     .set('Cookie', cookie)
     .send()
     .expect(200)
@@ -235,17 +240,8 @@ it('passes with profit and profilePercent and holdings pre-save() in SELL StockC
     .send()
     .expect(200)
 
-  // Buffer.from(JSON.stringify({"count":2})).toString('base64')
-  // ['my-session=' + cookie + '; ' + 'my-session.sig=' + hash + ';']
-
-  // const resp3 = await request(app)
-  //   .post(`/api/transact/`)
-  //   .set('Cookie', cookie)
-  //   .send(transact3)
-  //   .expect(201)
-
   const resp3GET = await request(app)
-    .get(`/api/stockcode/${body.userId}`)
+    .get(`/api/stockcode/${body.companyCode}`)
     .set('Cookie', cookie)
     .send()
     .expect(200)
