@@ -12,7 +12,7 @@ route.get(
   async (req: Request, res: Response) => {
     const list = await Transact.find({
       userId: req.currentUser!.userId,
-      companyCode: req.params.stockCode,
+      companyCode: req.params.stockcode,
     }).sort({ createdAt: 'desc' })
     res.send(list)
   }

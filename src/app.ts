@@ -3,13 +3,16 @@ import { json } from 'body-parser'
 import passport from 'passport'
 require('express-async-errors')
 import cookieSession from 'cookie-session'
+import cors from 'cors'
 
 import {
   signOutRoute,
   signUpRoute,
   currentUserRoute,
   signInRoute,
-  googlePassport,
+  googleAuth,
+  // googleAuthRedirect,
+  //googlePassport,
 } from './routes/users/'
 
 import { test } from './routes/mytest'
@@ -21,6 +24,7 @@ import {
   stockCodeShow,
   stockCodeUpdate,
   stockCodeSummary,
+  stockCodeCurrency,
 } from './routes/stockcodes'
 
 import { transactList, transactNew, transactAllByDate } from './routes/transact'
@@ -33,9 +37,16 @@ require('./apis/passport')
 
 const app = express()
 
-app.set('trust proxy', true) // Express sits behind trustful proxy
+//app.set('trust proxy', true) // Express sits behind trustful proxy
 
 app.use(json())
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+}
+
+app.use(cors(corsOptions))
 
 // ----> For cookie-session npm ( session is only kept in client side )
 // ----> It supports req.session.jwt
@@ -76,7 +87,9 @@ app.use(signOutRoute)
 app.use(signUpRoute)
 app.use(currentUserRoute)
 app.use(signInRoute)
-app.use(googlePassport)
+//app.use(googlePassport)
+//app.use(googleAuthRedirect)
+app.use(googleAuth)
 
 app.use(stockCodeDelete)
 app.use(stockCodeList)
@@ -84,6 +97,7 @@ app.use(stockCodeNew)
 app.use(stockCodeShow)
 app.use(stockCodeUpdate)
 app.use(stockCodeSummary)
+app.use(stockCodeCurrency)
 
 app.use(transactList)
 app.use(transactNew)

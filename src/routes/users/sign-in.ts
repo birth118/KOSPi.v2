@@ -46,6 +46,8 @@ route.post(
     req.session = {
       jwt: userJWT,
     }
+    // console.log(req.session)
+
     res.send(user)
   }
 )

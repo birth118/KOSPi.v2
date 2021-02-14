@@ -19,11 +19,11 @@ it('passes 200 updating the stock detail with authentication', async () => {
   // console.log(cookie)
 
   const stockCode = {
-    companyName: 'NHN',
-    companyCode: '123457',
+    companyName: '제일기획',
+    companyCode: '030000',
     market: 'KOSPI',
-    currency: 'CNY',
-    wics: '번기전자',
+    currency: 'KRW',
+    wics: '광고',
   }
   const updates = {
     evEbitda: 10.4,
@@ -39,7 +39,7 @@ it('passes 200 updating the stock detail with authentication', async () => {
     .expect(201)
 
   const patch = await request(app)
-    .patch(`/api/stockcode/${respPOST.body._id}`)
+    .patch(`/api/stockcode/${respPOST.body.companyCode}`)
     .set('Cookie', cookie)
     .send(updates)
     .expect(200)

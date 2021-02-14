@@ -30,7 +30,7 @@ export const currentUser = (
 ) => {
   //console.log('--->CURRENT USER')
 
-  //console.log(req.session)
+  // console.log(req.session)
 
   // -> req.isAuthenticated() is only avaiable for Passport.
   // JWT session doesn't provide this

@@ -13,6 +13,7 @@ import { Password } from '../middleware'
  */
 
 interface UserAttrs {
+  _id?: string
   name: string
   email: string
   password: string
