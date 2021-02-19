@@ -2,17 +2,17 @@ import { Request, Response, NextFunction } from 'express'
 
 import jwt from 'jsonwebtoken'
 
-import { StockCode } from '../models/stockCode'
-const secret = process.env.JWT_SECRET || 'SECRET'
+const secret = process.env.JWT_SECRET as string
 
 export interface UserPayload {
   email: string
   userId: string
-  holdingStocks: {
-    companyCode: string
-    holdings: number
-    avgBuyingPrice: number
-  }[]
+  name: string
+  // holdingStocks: {
+  //   companyCode: string
+  //   holdings: number
+  //   avgBuyingPrice: number
+  // }[]
 }
 
 declare global {

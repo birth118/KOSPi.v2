@@ -7,7 +7,7 @@ import { Password, validate } from '../../middleware'
 import { NotFoundError, BadRequestError } from '../../errors/custom-error'
 import { User } from '../../models/user'
 
-const secret = process.env.JWT_SECRET || 'SECRET'
+const secret = process.env.JWT_SECRET as string
 
 const route = express.Router()
 

@@ -15,6 +15,7 @@ route.get(
     const currenciesTable = await currencyTable()
 
     const list = await StockCode.find({
+      //@ts-ignore
       userId: req.currentUser!.userId,
     })
 

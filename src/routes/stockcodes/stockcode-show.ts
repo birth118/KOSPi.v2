@@ -28,8 +28,9 @@ route.get(
       stock!.currentPrice = jongmok.price
     } catch (err) {
       console.log(err)
+      stock!.currentPrice = 0
       //  console.log('KRX api error')
-      throw new BadRequestError('KRX api error')
+      //throw new BadRequestError('KRX api error')
     }
 
     // console.log(stock)

@@ -6,7 +6,7 @@ const route = express.Router()
 
 route.get(
   '/api/stockcodecurrency',
-  authRequired,
+  // authRequired,
   async (req: Request, res: Response) => {
     const currencies = await currencyTable()
     //  console.log(currencies)

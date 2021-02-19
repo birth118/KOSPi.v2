@@ -6,7 +6,8 @@ import { BadRequestError } from '../../errors/custom-error'
 
 import { validate } from '../../middleware/validate'
 import { User, UserAttrs } from '../../models/user'
-const secret = process.env.JWT_SECRET || 'SECRET'
+
+const secret = process.env.JWT_SECRET as string
 
 const route = express.Router()
 

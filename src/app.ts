@@ -1,6 +1,6 @@
 import express from 'express'
 import { json } from 'body-parser'
-import passport from 'passport'
+//import passport from 'passport'
 require('express-async-errors')
 import cookieSession from 'cookie-session'
 import cors from 'cors'
@@ -73,11 +73,13 @@ app.use(
 //   })
 // )
 
-// PASSPORT INITIALISATION & session
-app.use(passport.initialize())
+/* PASSPORT is no longer used */
 
-// --> TO bind to req.session.passport. In case req.session.jwt, not effective
-app.use(passport.session())
+// PASSPORT INITIALISATION & session
+// app.use(passport.initialize())
+
+// // --> TO bind to req.session.passport. In case req.session.jwt, not effective
+// app.use(passport.session())
 
 // Explicitly run to get currentUser
 app.use(currentUser)
