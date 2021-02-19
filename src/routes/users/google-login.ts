@@ -5,21 +5,23 @@ import axios from 'axios'
 import { User, UserAttrs } from '../../models/user'
 import { BadRequestError } from '../../errors/custom-error'
 
-const secret = process.env.JWT_SECRET || 'SECRET'
+const secret = process.env.JWT_SECRET
 
 const route = express.Router()
 // const route1 = express.Router()
 
 route.get('/auth/google', (req, res) => {
-  const googleAuthURL = 'https://accounts.google.com/o/oauth2/v2/auth'
-  const client_id =
-    '298787624725-n2ba208qn22h4aa55gkahu9de51k53q2.apps.googleusercontent.com'
-  const redirect_uri = 'http://localhost:3000/auth/google/secrets' // Redirect to a React route
+  const googleAuthURL = process.env.GOOGLE_AUTH_URL as string
+  const googleClinetId = process.env.GOOGLE_CLIENT_ID as string
+
+  const redirect_uri = process.env.GOOGLE_AUTH_REDIRECT_URI_DEV as string //for Dev
+  //const redirect_uri= process.env.GOOGLE_AUTH_REDIRECT_URI_PROD as string  //for PROD
+
   const response_type = 'code'
   const scope = 'email profile'
   const access_type = 'online'
 
-  const redirectURL = `${googleAuthURL}?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}&access_type=${access_type}`
+  const redirectURL = `${googleAuthURL}?client_id=${googleClinetId}&redirect_uri=${redirect_uri}&response_type=${response_type}&scope=${scope}&access_type=${access_type}`
   //   'https://accounts.google.com/o/oauth2/v2/auth?client_id=298787624725-n2ba208qn22h4aa55gkahu9de51k53q2.apps.googleusercontent.com&redirect_uri=http://localhost:5000/auth/google/secrets&response_type=code&scope=email&access_type=online'
 
   res.redirect(redirectURL)

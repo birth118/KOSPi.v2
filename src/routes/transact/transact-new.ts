@@ -47,7 +47,6 @@ route.post(
     let profitPercent = 0
 
     if (buyOrSell === BuyOrSell.SELL) {
-      const holdingStocks = req.currentUser!.holdingStocks
       // console.log(req.currentUser!)
 
       const stock = await StockCode.findOne({

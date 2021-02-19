@@ -19,20 +19,19 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 import { User } from '../models/user'
 
-const GOOGLE_CLIENT_ID =
-  '298787624725-n2ba208qn22h4aa55gkahu9de51k53q2.apps.googleusercontent.com'
-const GOOGLE_CLIENT_SECRET = 'h2kxPbT5qdy4fHftet5VqF5y'
+const googleClinetId = process.env.GOOGLE_CLIENT_ID as string
+const googleClinetSecret = process.env.GOOGLE_CLIENT_SECRET as string
 
 // CALLBACK_URL has been defined in google side
 const CALLBACK_URL = 'http://localhost:3000/auth/google/secrets'
 
 // GOOGLE OAuth2 strategy
-
+/* 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
+      clientID: googleClinetId,
+      clientSecret: googleClinetSecret,
       callbackURL: CALLBACK_URL,
     },
     function (accessToken: any, refreshToken: any, profile: any, done: any) {
@@ -76,7 +75,7 @@ passport.deserializeUser(function (id, done) {
     done(err, user)
   })
 })
-
+ */
 /* 
 
 {
