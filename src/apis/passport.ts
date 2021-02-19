@@ -26,7 +26,7 @@ const googleClinetSecret = process.env.GOOGLE_CLIENT_SECRET as string
 const CALLBACK_URL = 'http://localhost:3000/auth/google/secrets'
 
 // GOOGLE OAuth2 strategy
-
+/* 
 passport.use(
   new GoogleStrategy(
     {
@@ -75,7 +75,7 @@ passport.deserializeUser(function (id, done) {
     done(err, user)
   })
 })
-
+ */
 /* 
 
 {
